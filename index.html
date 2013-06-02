@@ -11,11 +11,22 @@
 <div class="content">
 	<div class="content-inner">
 		<div id="panel_login">
-			<input id="user_name" type="text" value="张三" placeholder="请输入姓名" autocomplete="off">
+			<select id="user_name">
+				<option value="张三">张三</option>
+				<option value="李四">李四</option>
+				<option value="王二">王二</option>
+			</select>
+			<!--<input id="user_name" type="text" value="张三" placeholder="请输入姓名" autocomplete="off">-->
 			<button id="btn_login">登录</button>
 		</div>
 		<div id="panel_workflow" style="display: none;">
 			<button id="btn_logout">退出</button>
+			<div class="explain" style="float: right;">
+				说明：
+				<span class="treated">已处理</span>
+				<span class="current">当前</span>
+				<span class="untreated">未处理</span>
+			</div>
 			<div style="clear: both;overflow: hidden;">
 				<div id="doc">
 					<h2>表单</h2>
