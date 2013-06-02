@@ -117,7 +117,8 @@ model.Node = model.CountableClass.extend({
 	 * @return {boolean}
 	 */
 	isUntreated: function () {
-		return this._nodeStatus.getStatus() === model.Node.STATUS.UNTREATED;
+		return this._nodeStatus.getStatus() === model.Node.STATUS.UNTREATED||
+			this._nodeStatus.getStatus() === model.Node.STATUS.GO_BACK;
 	},
 	/**
 	 * 是否已处理

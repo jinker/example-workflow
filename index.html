@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>工作流程原型</title>
+	<link rel="stylesheet" type="text/css" href="./css/css.css"/>
 </head>
 <body>
 <div class="head">
@@ -10,19 +11,26 @@
 <div class="content">
 	<div class="content-inner">
 		<div id="panel_login">
-			<input id="user_name" type="text" placeholder="请输入姓名">
+			<input id="user_name" type="text" value="张三" placeholder="请输入姓名" autocomplete="off">
 			<button id="btn_login">登录</button>
 		</div>
 		<div id="panel_workflow" style="display: none;">
 			<button id="btn_logout">退出</button>
-			<ul id="node_list">
-				<li>
-					流程1
-				</li>
-				<li>
-					流程2
-				</li>
-			</ul>
+			<div style="clear: both;overflow: hidden;">
+				<div id="doc">
+					<h2>表单</h2>
+					<div>表单内容</div>
+				</div>
+				<ul id="node_list">
+					<li>
+						流程1
+					</li>
+					<li>
+						流程2
+					</li>
+				</ul>
+			</div>
+			<div id="buttons"></div>
 		</div>
 	</div>
 </div>

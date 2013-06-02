@@ -20,6 +20,12 @@ app.Workflow = util.Class.extend({
 		return this._nodes;
 	},
 	/**
+	 * @return {model.Document}
+	 */
+	getDoc: function () {
+		return this._doc;
+	},
+	/**
 	 * 获取现在需处理的节点
 	 * @return {model.Node|null} 流程节点
 	 */

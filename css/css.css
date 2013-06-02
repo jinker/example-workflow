@@ -1,0 +1,12 @@
+.head h1 { text-align: center; }
+.content-inner { width: 960px; margin: 0 auto; }
+#panel_login { width: 200px; margin: 0 auto; }
+#workflow { text-align: center; }
+#doc { float: left; width: 700px; }
+#buttons { text-align: center; }
+#node_list { float: right; width: 100px; margin: 0 auto; }
+#node_list .treated { background-color: #708090; }
+#node_list .untreated { background-color: #98fb98; }
+#node_list .current { background-color: #b22222; }
+#node_list li { list-style: none; height: 100px; text-align: center; border: #a9a9a9 solid 1px; margin-bottom: 10px; }
+.popup{position: absolute;width: 300px;height: 150px;top:50%;left:50%;margin-top:-75px;margin-left:-150px;border: 1px solid #696969;}
