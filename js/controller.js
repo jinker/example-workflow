@@ -1,5 +1,6 @@
 util.namespace("app");
 
+
 app.Workflow = util.Class.extend({
 	/**
 	 * 业务流程
