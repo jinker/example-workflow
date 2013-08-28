@@ -140,12 +140,14 @@ model.Node = model.CountableClass.extend({
         return this.jurisdiction;
     }
 });
+
 model.Node.STATUS = {
     UNTREATED: 0,//未处理
     AGREE: 1,//同意
     DISAGREE: 2,//不同意
     GO_BACK: 3//退回
 };
+
 model.NodeStatus = util.Class.extend({
     /**
      * 流程节点状态
