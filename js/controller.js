@@ -1,130 +1,130 @@
 util.namespace("app");
 
 app.Workflow = util.Class.extend({
-	/**
-	 * ÒµÎñÁ÷³Ì
-	 * @param {Array.<model.Node>} nodes ½ÚµãÊı×é
-	 * @param {model.Document} doc µ¥¾İ
-	 * @constructs
-	 */
-	init: function (nodes, doc) {
-		this._nodes = nodes;
-		this._doc = doc;
-		this._staff = null;
-	},
-	/**
-	 * »ñÈ¡ËùÓĞ½Úµã
-	 * @return {Array.<model.Node>}
-	 */
-	getNodes: function () {
-		return this._nodes;
-	},
-	/**
-	 * @return {model.Document}
-	 */
-	getDoc: function () {
-		return this._doc;
-	},
-	/**
-	 * »ñÈ¡ÏÖÔÚĞè´¦ÀíµÄ½Úµã
-	 * @return {model.Node|null} Á÷³Ì½Úµã
-	 */
-	getCurrentNode: function () {
-		var cur = null;
-		if (this._nodes) {
-			/**
-			 * µÚÒ»¸öÎ´´¦ÀíµÄ½Úµã¼´Îªµ±Ç°½Úµã
-			 */
-			var node;
-			for (var i = 0; node = this._nodes[i]; i++) {
-				if (node.isUntreated()) {
-					cur = node;
-					break;
-				}
-			}
-		}
-		return cur;
-	},
-	/**
-	 * »ñÈ¡ÒÑ´¦Àí½Úµã
-	 * @return {Array.<model.Node>}
-	 */
-	getNodesTreated: function () {
-		var result = [];
-		if (this._nodes) {
-			var node;
-			for (var i = 0; node = this._nodes[i]; i++) {
-				if (node.isTreated()) {
-					result.push(node);
-				}
-			}
-		}
-		return result;
-	},
-	/**
-	 * »ñÈ¡½«±»´¦Àí½Úµã
-	 * @return {Array.<model.Node>}
-	 */
-	getNodesWillBe: function () {
-		var result = [];
-		var first = true;
-		if (this._nodes) {
-			var node;
-			for (var i = 0; node = this._nodes[i]; i++) {
-				//ÅÅ³ıµÚÒ»¸öµ±Ç°Î´´¦Àí½Úµã
-				if (!node.isTreated()) {
-					if (first) {
-						first = false;
-					} else {
-						result.push(node);
-					}
-				}
-			}
-		}
-		return result;
-	},
-	/**
-	 * ÉèÖÃÈËÔ±
-	 * @param {model.Staff} staff
-	 */
-	setStaff: function (staff) {
-		this._staff = staff;
-	},
-	/**
-	 * Í¬Òâ
-	 * @param {model.Staff} staff
-	 */
-	agree: function (staff) {
-		var currentNode = this.getCurrentNode();
-		currentNode.setNodeStatus(new model.NodeStatus(model.Node.STATUS.AGREE, staff));
-	},
-	/**
-	 * ²»Í¬Òâ
-	 * @param {model.Staff} staff
-	 */
-	disagree: function (staff) {
-		var currentNode = this.getCurrentNode();
-		currentNode.setNodeStatus(new model.NodeStatus(model.Node.STATUS.DISAGREE, staff));
-	},
-	/**
-	 * ÍË»Ø
-	 * @param {model.Staff} staff
-	 * @return {boolean} ÊÇ·ñÍË»Ø³É¹¦
-	 */
-	goBack: function (staff) {
-		var nodesTreated = this.getNodesTreated();
-		if (nodesTreated.length > 0) {
-			var lastTreatedNode = nodesTreated[nodesTreated.length - 1];
-			lastTreatedNode.getNodeStatus().setStatus(model.Node.STATUS.GO_BACK);
-			return true;
-		}
-		return false;
-	},
-	/**
-	 * ×ª·¢ÆäËûÈËÔ±´¦Àí
-	 * @param {model.Staff} otherStaff
-	 */
-	transferToOther: function (otherStaff) {
-		otherStaff.addJurisdiction(this.getCurrentNode().getJurisdiction());
-	}
+    /**
+     * ä¸šåŠ¡æµç¨‹
+     * @param {Array.<model.Node>} nodes èŠ‚ç‚¹æ•°ç»„
+     * @param {model.Document} doc å•æ®
+     * @constructs
+     */
+    init: function (nodes, doc) {
+        this._nodes = nodes;
+        this._doc = doc;
+        this._staff = null;
+    },
+    /**
+     * è·å–æ‰€æœ‰èŠ‚ç‚¹
+     * @return {Array.<model.Node>}
+     */
+    getNodes: function () {
+        return this._nodes;
+    },
+    /**
+     * @return {model.Document}
+     */
+    getDoc: function () {
+        return this._doc;
+    },
+    /**
+     * è·å–ç°åœ¨éœ€å¤„ç†çš„èŠ‚ç‚¹
+     * @return {model.Node|null} æµç¨‹èŠ‚ç‚¹
+     */
+    getCurrentNode: function () {
+        var cur = null;
+        if (this._nodes) {
+            /**
+             * ç¬¬ä¸€ä¸ªæœªå¤„ç†çš„èŠ‚ç‚¹å³ä¸ºå½“å‰èŠ‚ç‚¹
+             */
+            var node;
+            for (var i = 0; node = this._nodes[i]; i++) {
+                if (node.isUntreated()) {
+                    cur = node;
+                    break;
+                }
+            }
+        }
+        return cur;
+    },
+    /**
+     * è·å–å·²å¤„ç†èŠ‚ç‚¹
+     * @return {Array.<model.Node>}
+     */
+    getNodesTreated: function () {
+        var result = [];
+        if (this._nodes) {
+            var node;
+            for (var i = 0; node = this._nodes[i]; i++) {
+                if (node.isTreated()) {
+                    result.push(node);
+                }
+            }
+        }
+        return result;
+    },
+    /**
+     * è·å–å°†è¢«å¤„ç†èŠ‚ç‚¹
+     * @return {Array.<model.Node>}
+     */
+    getNodesWillBe: function () {
+        var result = [];
+        var first = true;
+        if (this._nodes) {
+            var node;
+            for (var i = 0; node = this._nodes[i]; i++) {
+                //æ’é™¤ç¬¬ä¸€ä¸ªå½“å‰æœªå¤„ç†èŠ‚ç‚¹
+                if (!node.isTreated()) {
+                    if (first) {
+                        first = false;
+                    } else {
+                        result.push(node);
+                    }
+                }
+            }
+        }
+        return result;
+    },
+    /**
+     * è®¾ç½®äººå‘˜
+     * @param {model.Staff} staff
+     */
+    setStaff: function (staff) {
+        this._staff = staff;
+    },
+    /**
+     * åŒæ„
+     * @param {model.Staff} staff
+     */
+    agree: function (staff) {
+        var currentNode = this.getCurrentNode();
+        currentNode.setNodeStatus(new model.NodeStatus(model.Node.STATUS.AGREE, staff));
+    },
+    /**
+     * ä¸åŒæ„
+     * @param {model.Staff} staff
+     */
+    disagree: function (staff) {
+        var currentNode = this.getCurrentNode();
+        currentNode.setNodeStatus(new model.NodeStatus(model.Node.STATUS.DISAGREE, staff));
+    },
+    /**
+     * é€€å›
+     * @param {model.Staff} staff
+     * @return {boolean} æ˜¯å¦é€€å›æˆåŠŸ
+     */
+    goBack: function (staff) {
+        var nodesTreated = this.getNodesTreated();
+        if (nodesTreated.length > 0) {
+            var lastTreatedNode = nodesTreated[nodesTreated.length - 1];
+            lastTreatedNode.getNodeStatus().setStatus(model.Node.STATUS.GO_BACK);
+            return true;
+        }
+        return false;
+    },
+    /**
+     * è½¬å‘å…¶ä»–äººå‘˜å¤„ç†
+     * @param {model.Staff} otherStaff
+     */
+    transferToOther: function (otherStaff) {
+        otherStaff.addJurisdiction(this.getCurrentNode().getJurisdiction());
+    }
 });

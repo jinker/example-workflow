@@ -1,173 +1,173 @@
 /**
  * Date: 13-6-1
- * Time: ÏÂÎç2:52
- * Êı¾İÄ£ĞÍ
+ * Time: ä¸‹åˆ2:52
+ * æ•°æ®æ¨¡å‹
  * @author jinker
  */
 util.namespace("model");
 
 model.CountableClass = util.Class.extend({
-	/**
-	 * @constructs
-	 */
-	init: function () {
-		this._index = model.CountableClass.index++;
-	},
-	/**
-	 * »ñÈ¡id
-	 * @return {string}
-	 */
-	getId: function () {
-		return this._index + "";
-	}
+    /**
+     * @constructs
+     */
+    init: function () {
+        this._index = model.CountableClass.index++;
+    },
+    /**
+     * è·å–id
+     * @return {string}
+     */
+    getId: function () {
+        return this._index + "";
+    }
 });
-//¼ÆÊı
+//è®¡æ•°
 model.CountableClass.index = 0;
 
 model.Staff = model.CountableClass.extend({
-	/**
-	 * ÈËÔ±
-	 * @param {string} name ĞÕÃû
-	 * @param {Array.<model.Jurisdiction>} jurisdictions ĞÕÃû
-	 * @constructs
-	 */
-	init: function (name, jurisdictions) {
-		this._super.apply(this, Array.prototype.slice.call(arguments, 0));
-		this.name = name;
-		this._jurisdicions = jurisdictions || [];
-	},
-	/**
-	 * Ôö¼ÓÈ¨ÏŞ
-	 * @param {model.Jurisdiction} jurisdiction
-	 */
-	addJurisdiction: function (jurisdiction) {
-		this._jurisdicions.push(jurisdiction);
-	},
-	/**
-	 * ÊÇ·ñ¾ßÓĞ¸ÃÈ¨ÏŞ
-	 * @param {string} jurisdictionId
-	 * @return {boolean}
-	 */
-	canHandle: function (jurisdictionId) {
-		var jurisdiction;
-		for (var i = 0; jurisdiction = this._jurisdicions[i]; i++) {
-			if (jurisdiction.getId() === jurisdictionId) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * äººå‘˜
+     * @param {string} name å§“å
+     * @param {Array.<model.Jurisdiction>} jurisdictions å§“å
+     * @constructs
+     */
+    init: function (name, jurisdictions) {
+        this._super.apply(this, Array.prototype.slice.call(arguments, 0));
+        this.name = name;
+        this._jurisdicions = jurisdictions || [];
+    },
+    /**
+     * å¢åŠ æƒé™
+     * @param {model.Jurisdiction} jurisdiction
+     */
+    addJurisdiction: function (jurisdiction) {
+        this._jurisdicions.push(jurisdiction);
+    },
+    /**
+     * æ˜¯å¦å…·æœ‰è¯¥æƒé™
+     * @param {string} jurisdictionId
+     * @return {boolean}
+     */
+    canHandle: function (jurisdictionId) {
+        var jurisdiction;
+        for (var i = 0; jurisdiction = this._jurisdicions[i]; i++) {
+            if (jurisdiction.getId() === jurisdictionId) {
+                return true;
+            }
+        }
+        return false;
+    }
 });
 
 model.Jurisdiction = model.CountableClass.extend({
-	/**
-	 * È¨ÏŞ
-	 * @param {string} name Ãû³Æ
-	 * @constructs
-	 */
-	init: function (name) {
-		this._super.apply(this, Array.prototype.slice.call(arguments, 0));
-		this.name = name;
-	}
+    /**
+     * æƒé™
+     * @param {string} name åç§°
+     * @constructs
+     */
+    init: function (name) {
+        this._super.apply(this, Array.prototype.slice.call(arguments, 0));
+        this.name = name;
+    }
 });
 
 model.Document = model.CountableClass.extend({
-	/**
-	 * µ¥¾İ
-	 * @param {string} name Ãû³Æ
-	 * @param {*=} asset ×ÊÔ´
-	 * @constructs
-	 */
-	init: function (name, asset) {
-		this._super.apply(this, Array.prototype.slice.call(arguments, 0));
-		this.name = name;
-		this.asset = asset;
-	}
+    /**
+     * å•æ®
+     * @param {string} name åç§°
+     * @param {*=} asset èµ„æº
+     * @constructs
+     */
+    init: function (name, asset) {
+        this._super.apply(this, Array.prototype.slice.call(arguments, 0));
+        this.name = name;
+        this.asset = asset;
+    }
 });
 
 model.Node = model.CountableClass.extend({
-	/**
-	 * Á÷³Ì½Úµã
-	 * @param {string} name Ãû³Æ
-	 * @param {model.Jurisdiction} jurisdiction È¨ÏŞ
-	 * @constructs
-	 */
-	init: function (name, jurisdiction) {
-		this._super.apply(this, Array.prototype.slice.call(arguments, 0));
-		this.name = name;
-		this.jurisdiction = jurisdiction;
-		this._nodeStatus = new model.NodeStatus();
-	},
-	/**
-	 * ÉèÖÃ×´Ì¬
-	 * @param {model.NodeStatus} nodeStatus
-	 */
-	setNodeStatus: function (nodeStatus) {
-		this._nodeStatus = nodeStatus;
-	},
-	/**
-	 * »ñÈ¡×´Ì¬
-	 * @return {model.NodeStatus}
-	 */
-	getNodeStatus: function () {
-		return this._nodeStatus;
-	},
-	/**
-	 * ÊÇ·ñÎ´´¦Àí
-	 * @return {boolean}
-	 */
-	isUntreated: function () {
-		return this._nodeStatus.getStatus() === model.Node.STATUS.UNTREATED||
-			this._nodeStatus.getStatus() === model.Node.STATUS.GO_BACK;
-	},
-	/**
-	 * ÊÇ·ñÒÑ´¦Àí
-	 * @return {boolean}
-	 */
-	isTreated: function () {
-		switch (this._nodeStatus.getStatus()) {
-			case model.Node.STATUS.AGREE:
-			case model.Node.STATUS.DISAGREE:
-				return true;
-		}
-		return false;
-	},
-	/**
-	 * »ñÈ¡È¨ÏŞ
-	 * @return {model.Jurisdiction}
-	 */
-	getJurisdiction: function () {
-		return this.jurisdiction;
-	}
+    /**
+     * æµç¨‹èŠ‚ç‚¹
+     * @param {string} name åç§°
+     * @param {model.Jurisdiction} jurisdiction æƒé™
+     * @constructs
+     */
+    init: function (name, jurisdiction) {
+        this._super.apply(this, Array.prototype.slice.call(arguments, 0));
+        this.name = name;
+        this.jurisdiction = jurisdiction;
+        this._nodeStatus = new model.NodeStatus();
+    },
+    /**
+     * è®¾ç½®çŠ¶æ€
+     * @param {model.NodeStatus} nodeStatus
+     */
+    setNodeStatus: function (nodeStatus) {
+        this._nodeStatus = nodeStatus;
+    },
+    /**
+     * è·å–çŠ¶æ€
+     * @return {model.NodeStatus}
+     */
+    getNodeStatus: function () {
+        return this._nodeStatus;
+    },
+    /**
+     * æ˜¯å¦æœªå¤„ç†
+     * @return {boolean}
+     */
+    isUntreated: function () {
+        return this._nodeStatus.getStatus() === model.Node.STATUS.UNTREATED||
+            this._nodeStatus.getStatus() === model.Node.STATUS.GO_BACK;
+    },
+    /**
+     * æ˜¯å¦å·²å¤„ç†
+     * @return {boolean}
+     */
+    isTreated: function () {
+        switch (this._nodeStatus.getStatus()) {
+            case model.Node.STATUS.AGREE:
+            case model.Node.STATUS.DISAGREE:
+                return true;
+        }
+        return false;
+    },
+    /**
+     * è·å–æƒé™
+     * @return {model.Jurisdiction}
+     */
+    getJurisdiction: function () {
+        return this.jurisdiction;
+    }
 });
 model.Node.STATUS = {
-	UNTREATED: 0,//Î´´¦Àí
-	AGREE: 1,//Í¬Òâ
-	DISAGREE: 2,//²»Í¬Òâ
-	GO_BACK: 3//ÍË»Ø
+    UNTREATED: 0,//æœªå¤„ç†
+    AGREE: 1,//åŒæ„
+    DISAGREE: 2,//ä¸åŒæ„
+    GO_BACK: 3//é€€å›
 };
 model.NodeStatus = util.Class.extend({
-	/**
-	 * Á÷³Ì½Úµã×´Ì¬
-	 * @param {int=} status ×´Ì¬
-	 * @param {model.Staff=} staff ÈËÔ±
-	 * @constructs
-	 */
-	init: function (status, staff) {
-		this._status = status || model.Node.STATUS.UNTREATED;
-		this.staff = staff;
-	},
-	/**
-	 * @return {int}
-	 */
-	getStatus: function () {
-		return this._status;
-	},
-	/**
-	 * ÉèÖÃ×´Ì¬
-	 * @param {int} status
-	 */
-	setStatus: function (status) {
-		this._status = status;
-	}
+    /**
+     * æµç¨‹èŠ‚ç‚¹çŠ¶æ€
+     * @param {int=} status çŠ¶æ€
+     * @param {model.Staff=} staff äººå‘˜
+     * @constructs
+     */
+    init: function (status, staff) {
+        this._status = status || model.Node.STATUS.UNTREATED;
+        this.staff = staff;
+    },
+    /**
+     * @return {int}
+     */
+    getStatus: function () {
+        return this._status;
+    },
+    /**
+     * è®¾ç½®çŠ¶æ€
+     * @param {int} status
+     */
+    setStatus: function (status) {
+        this._status = status;
+    }
 });
