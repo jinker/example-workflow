@@ -10,7 +10,7 @@ app.model.NodeStatus = app.Class.extend({
      * @constructs
      */
     init: function (status, staff) {
-        this._status = status || model.Node.STATUS.UNTREATED;
+        this._status = status || app.model.Node.STATUS.UNTREATED;
         this.staff = staff;
     },
     /**

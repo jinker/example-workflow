@@ -1,6 +1,8 @@
 goog.provide("app.model.CountableClass");
 
-app.model.CountableClass = util.Class.extend({
+goog.require("app.Class");
+
+app.model.CountableClass = app.Class.extend({
     /**
      * @constructs
      */

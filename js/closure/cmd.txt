@@ -1,0 +1,1 @@
+closure\lib\closure-library\closure\bin\build\depswriter.py --root_with_prefix="closure\app ../../../../app" --output_file="./closure/app.deps.js"

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>工作流程原型</title>
-    <link rel="stylesheet" type="text/css" href="../css/css.css"/>
+    <link rel="stylesheet" type="text/css" href="css/css.css"/>
 </head>
 <body>
 <div class="head">
@@ -47,11 +47,20 @@
         </div>
     </div>
 </div>
+
+<!--lib-->
 <script type="text/javascript" src="js/lib/jquery-1.8.2.js"></script>
-<script type="text/javascript" src="js/lib/namespace.js"></script>
-<script type="text/javascript" src="js/lib/classDef.js"></script>
-<script type="text/javascript" src="js/model.js"></script>
-<script type="text/javascript" src="js/controller.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+
+<!--normal-->
+<!--<script type="text/javascript" src="js/normal/namespace.js"></script>-->
+<!--<script type="text/javascript" src="js/normal/classDef.js"></script>-->
+<!--<script type="text/javascript" src="js/normal/model.js"></script>-->
+<!--<script type="text/javascript" src="js/normal/controller.js"></script>-->
+<!--<script type="text/javascript" src="js/normal/entrtPoint.js"></script>-->
+
+<!--closure-->
+<script type="text/javascript" src="js/closure/lib/closure-library/closure/goog/base.js"></script>
+<script type="text/javascript" src="js/closure/app.deps.js"></script>
+<script type="text/javascript">goog.require("app.entryPoint")</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 goog.provide("app.model.Node");
 
 goog.require("app.model.CountableClass");
+goog.require("app.model.NodeStatus");
 
 app.model.Node = app.model.CountableClass.extend({
     /**
@@ -13,18 +14,18 @@ app.model.Node = app.model.CountableClass.extend({
         this._super.apply(this, Array.prototype.slice.call(arguments, 0));
         this.name = name;
         this.jurisdiction = jurisdiction;
-        this._nodeStatus = new model.NodeStatus();
+        this._nodeStatus = new app.model.NodeStatus();
     },
     /**
      * 设置状态
-     * @param {model.NodeStatus} nodeStatus
+     * @param {app.model.NodeStatus} nodeStatus
      */
     setNodeStatus: function (nodeStatus) {
         this._nodeStatus = nodeStatus;
     },
     /**
      * 获取状态
-     * @return {model.NodeStatus}
+     * @return {app.model.NodeStatus}
      */
     getNodeStatus: function () {
         return this._nodeStatus;
